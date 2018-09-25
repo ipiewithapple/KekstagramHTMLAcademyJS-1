@@ -22,6 +22,15 @@ var pictureBlock = document.querySelector('.pictures');
 var fragment = document.createDocumentFragment();
 var commentTemplate = document.querySelector('#comments').content.querySelector('li');
 var commentBlock = document.querySelector('.social__comments');
+var bigPicture = document.querySelector('.big-picture');
+var uploadFiles = document.querySelector('#upload-file');
+var uploadCancel = document.querySelector('#upload-cancel');
+var levelPin = document.querySelector('.effect-level__pin');
+var levelDepth = document.querySelector('.effect-level__depth');
+var uploadPreview = document.querySelector('.img-upload__preview');
+
+
+
 
 function randInt(min, max) {
   var like = Math.round(Math.random() * (max - min)) + min;
@@ -41,7 +50,6 @@ function genComeents() {
   }
   return commentsArr;
 }
-
 
 function generatePhotos() {
   for (i = 1; i <= ALL_PHOTOS; i++) {
@@ -66,10 +74,9 @@ function createPhotoElements() {
   }
   pictureBlock.appendChild(fragment);
 }
+createPhotoElements();
 
 function getBigPhoto(nu) {
-  var bigPicture = document.querySelector('.big-picture');
-  bigPicture.classList.remove('hidden');
   bigPicture.querySelector('.big-picture__img img').src = photos[nu].url;
   bigPicture.querySelector('.likes-count').textContent = photos[nu].likes;
   bigPicture.querySelector('.comments-count').textContent = photos[nu].comments.length;
@@ -85,10 +92,99 @@ function setNewComment(nu) {
     fragment.appendChild(newComment);
   }
 }
+setNewComment(10);
+getBigPhoto(10);
+
+function onUploadFileClick() {
+  document.querySelector('.img-upload__overlay').classList.remove('hidden');
+  resetFilterValue();
+}
+
+function onUploadCancelClick() {
+  document.querySelector('.img-upload__overlay').classList.add('hidden');
+}
+
+function resetFilterValue() {
+  levelPin.style.left = '0%';
+  levelDepth.style.width = '0%';
+}
+// Эффекты фото
+
+var noneEffect = document.querySelector('.effects__preview--none');
+var chromeEffect = document.querySelector('.effects__preview--chrome');
+var sepiaEffect = document.querySelector('.effects__preview--sepia');
+var marvinEffect = document.querySelector('.effects__preview--marvin');
+var phobosEffect = document.querySelector('.effects__preview--phobos');
+var heatEffect = document.querySelector('.effects__preview--heat');
+
+function onNoneFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  levelPin.style.left = '0%';
+  levelDepth.style.width = '0%';
+}
+
+function onChromeFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  uploadPreview.classList.add('effects__preview--chrome');
+  levelPin.style.left = '100%';
+  levelDepth.style.width = '100%';
+}
+
+function onSepiaFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  uploadPreview.classList.add('effects__preview--sepia');
+  levelPin.style.left = '100%';
+  levelDepth.style.width = '100%';
+}
+
+function onMarvinFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  uploadPreview.classList.add('effects__preview--marvin');
+  levelPin.style.left = '100%';
+  levelDepth.style.width = '100%';
+}
+
+function onPhobosFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  uploadPreview.classList.add('effects__preview--phobos');
+  levelPin.style.left = '100%';
+  levelDepth.style.width = '100%';
+}
+
+function onHeatFilterClick() {
+  uploadPreview.className = 'img-upload__preview';
+  uploadPreview.classList.add('effects__preview--heat');
+  levelPin.style.left = '100%';
+  levelDepth.style.width = '100%';
+}
+
+chromeEffect.addEventListener('click', onChromeFilterClick);
+sepiaEffect.addEventListener('click', onSepiaFilterClick);
+marvinEffect.addEventListener('click', onMarvinFilterClick);
+phobosEffect.addEventListener('click', onPhobosFilterClick);
+heatEffect.addEventListener('click', onHeatFilterClick);
+noneEffect.addEventListener('click', onNoneFilterClick);
+
+// Открытие большого изображение по клику на миниатюре
+var miniPhotos = document.querySelectorAll('.picture');
+
+for (i = 0; i < miniPhotos.length; i++) {
+  miniPhotos[i].addEventListener('click', function () {
+    bigPicture.classList.remove('hidden');
+  })
+}
+
+//Закрытие большого изображения
+
+var closeBigPhoto = document.querySelector('#picture-cancel');
+
+closeBigPhoto.addEventListener('click', function(){
+  bigPicture.classList.add('hidden');
+})
+
+uploadFiles.addEventListener('change', onUploadFileClick);
+uploadCancel.addEventListener('click', onUploadCancelClick);
+
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.social__comments-loader').classList.add('visually-hidden');
-createPhotoElements();
-setNewComment(0);
-getBigPhoto(0);
-console.log(photos);
