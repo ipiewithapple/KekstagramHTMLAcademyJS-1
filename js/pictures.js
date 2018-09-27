@@ -92,24 +92,25 @@ function setNewComment(nu) {
     fragment.appendChild(newComment);
   }
 }
-setNewComment(10);
-getBigPhoto(10);
+setNewComment(11);
+getBigPhoto(11);
 
 function onUploadFileClick() {
   document.querySelector('.img-upload__overlay').classList.remove('hidden');
   resetFilterValue();
 }
+uploadFiles.addEventListener('change', onUploadFileClick);
 
 function onUploadCancelClick() {
   document.querySelector('.img-upload__overlay').classList.add('hidden');
 }
+uploadCancel.addEventListener('click', onUploadCancelClick);
 
 function resetFilterValue() {
   levelPin.style.left = '0%';
   levelDepth.style.width = '0%';
 }
 // Эффекты фото
-
 var noneEffect = document.querySelector('.effects__preview--none');
 var chromeEffect = document.querySelector('.effects__preview--chrome');
 var sepiaEffect = document.querySelector('.effects__preview--sepia');
@@ -178,12 +179,27 @@ for (i = 0; i < miniPhotos.length; i++) {
 
 var closeBigPhoto = document.querySelector('#picture-cancel');
 
-closeBigPhoto.addEventListener('click', function(){
+closeBigPhoto.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
+});
+
+// Проверка хэш-тегов на валидность
+
+document.querySelector('#upload-submit').addEventListener('click', function () {
+  var hashtags = document.querySelector('.text__hashtags');
+  var arrHashtags = hashtags.value.split(' ');
+  for (i = 0; i < arrHashtags.length; i++) {
+    if (arrHashtags[i].length > 20) {
+      hashtags.setCustomValidity("Длинна одного хэш-тега не должна превышать 20 символов");
+    }
+  }
+  console.log(arrHashtags);
+  return arrHashtags;
 })
 
-uploadFiles.addEventListener('change', onUploadFileClick);
-uploadCancel.addEventListener('click', onUploadCancelClick);
+
+
+// -------------------------------------------------------
 
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
