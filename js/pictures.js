@@ -184,13 +184,15 @@ closeBigPhoto.addEventListener('click', function () {
 });
 
 // Проверка хэш-тегов на валидность
-
-document.querySelector('#upload-submit').addEventListener('click', function () {
-  var hashtags = document.querySelector('.text__hashtags');
+var hashtags = document.querySelector('.text__hashtags');
+hashtags.addEventListener('input', function () {
   var arrHashtags = hashtags.value.split(' ');
   for (i = 0; i < arrHashtags.length; i++) {
     if (arrHashtags[i].length > 20) {
       hashtags.setCustomValidity("Длинна одного хэш-тега не должна превышать 20 символов");
+      break;
+    } else {
+      hashtags.setCustomValidity('');
     }
   }
   console.log(arrHashtags);
