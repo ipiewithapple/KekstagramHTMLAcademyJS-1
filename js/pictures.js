@@ -1,3 +1,5 @@
+'use strict';
+
 var ALL_PHOTOS = 25;
 var commentsArr = [];
 var photos = [];
@@ -27,15 +29,15 @@ var uploadFiles = document.querySelector('#upload-file');
 var uploadCancel = document.querySelector('#upload-cancel');
 var levelPin = document.querySelector('.effect-level__pin');
 var levelDepth = document.querySelector('.effect-level__depth');
-var uploadPreview = document.querySelector('.img-upload__preview');
+
 
 
 
 
 function randInt(min, max) {
-  var like = Math.round(Math.random() * (max - min)) + min;
+  var like = Math.floor(Math.random() * (max - min + 1)) + min;
   return like;
-}
+};
 
 function genComeents() {
   if (randInt(1, 2) === 2) {
@@ -52,7 +54,7 @@ function genComeents() {
 }
 
 function generatePhotos() {
-  for (i = 1; i <= ALL_PHOTOS; i++) {
+  for (var i = 1; i <= ALL_PHOTOS; i++) {
     photos[i - 1] = {
       url: 'photos/' + i + '.jpg',
       likes: randInt(15, 200),
@@ -65,7 +67,7 @@ function generatePhotos() {
 generatePhotos();
 
 function createPhotoElements() {
-  for (i = 0; i < photos.length; i++) {
+  for (var i = 0; i < photos.length; i++) {
     var newPhoto = pictureTemplate.cloneNode(true);
     newPhoto.querySelector('img').src = photos[i].url;
     newPhoto.querySelector('.picture__comments').textContent = photos[i].comments.length;
@@ -85,7 +87,7 @@ function getBigPhoto(nu) {
 }
 
 function setNewComment(nu) {
-  for (i = 0; i < photos[nu].comments.length; i++) {
+  for (var i = 0; i < photos[nu].comments.length; i++) {
     var newComment = commentTemplate.cloneNode(true);
     newComment.querySelector('img').src = 'img/avatar-' + randInt(1, 6) + '.svg';
     newComment.querySelector('.social__text').textContent = photos[nu].comments[i];
@@ -111,6 +113,8 @@ function resetFilterValue() {
   levelDepth.style.width = '0%';
 }
 // Эффекты фото
+
+var uploadPreview = document.querySelector('.img-upload__preview');
 var noneEffect = document.querySelector('.effects__preview--none');
 var chromeEffect = document.querySelector('.effects__preview--chrome');
 var sepiaEffect = document.querySelector('.effects__preview--sepia');
@@ -169,7 +173,7 @@ noneEffect.addEventListener('click', onNoneFilterClick);
 // Открытие большого изображение по клику на миниатюре
 var miniPhotos = document.querySelectorAll('.picture');
 
-for (i = 0; i < miniPhotos.length; i++) {
+for (var i = 0; i < miniPhotos.length; i++) {
   miniPhotos[i].addEventListener('click', function () {
     bigPicture.classList.remove('hidden');
   })
@@ -187,7 +191,7 @@ closeBigPhoto.addEventListener('click', function () {
 var hashtags = document.querySelector('.text__hashtags');
 hashtags.addEventListener('input', function () {
   var arrHashtags = hashtags.value.split(' ');
-  for (i = 0; i < arrHashtags.length; i++) {
+  for (var i = 0; i < arrHashtags.length; i++) {
     if (arrHashtags[i].length > 20) {
       hashtags.setCustomValidity("Длинна одного хэш-тега не должна превышать 20 символов");
       break;
@@ -195,9 +199,10 @@ hashtags.addEventListener('input', function () {
       hashtags.setCustomValidity('');
     }
   }
-  console.log(arrHashtags);
   return arrHashtags;
-})
+});
+
+// Эффекты перетаскивание
 
 
 
