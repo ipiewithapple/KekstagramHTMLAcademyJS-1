@@ -27,21 +27,19 @@
   var commentTemplate = document.querySelector('#comments').content.querySelector('li');
   var commentBlock = document.querySelector('.social__comments');
   var bigPicture = document.querySelector('.big-picture');
-  var uploadFiles = document.querySelector('#upload-file');
-  var uploadCancel = document.querySelector('#upload-cancel');
-  var levelPin = document.querySelector('.effect-level__pin');
-  var levelDepth = document.querySelector('.effect-level__depth');
 
 
 
 
-// Получение случайного целого числа от MIN до MAX включительно
+
+
+  // Получение случайного целого числа от MIN до MAX включительно
   function randInt(min, max) {
     var like = Math.floor(Math.random() * (max - min + 1)) + min;
     return like;
   };
 
-// Генерация комментариев
+  // Генерация комментариев
   function genComeents() {
     if (randInt(1, 2) === 2) {
       commentsArr = [
@@ -56,7 +54,7 @@
     return commentsArr;
   }
 
-//Генерация фото со всем контентом 
+  //Генерация фото со всем контентом 
   function generatePhotos() {
     for (var i = 1; i <= ALL_PHOTOS; i++) {
       photos[i - 1] = {
@@ -70,7 +68,7 @@
   }
   generatePhotos();
 
-  
+
   function createPhotoElements() {
     for (var i = 0; i < photos.length; i++) {
       var newPhoto = pictureTemplate.cloneNode(true);
@@ -102,79 +100,6 @@
   setNewComment(11);
   getBigPhoto(11);
 
-  function onUploadFileClick() {
-    document.querySelector('.img-upload__overlay').classList.remove('hidden');
-    resetFilterValue();
-  }
-  uploadFiles.addEventListener('change', onUploadFileClick);
-
-  function onUploadCancelClick() {
-    document.querySelector('.img-upload__overlay').classList.add('hidden');
-  }
-  uploadCancel.addEventListener('click', onUploadCancelClick);
-
-  function resetFilterValue() {
-    levelPin.style.left = '0%';
-    levelDepth.style.width = '0%';
-  }
-  // Эффекты фото
-
-  var uploadPreview = document.querySelector('.img-upload__preview');
-  var noneEffect = document.querySelector('.effects__preview--none');
-  var chromeEffect = document.querySelector('.effects__preview--chrome');
-  var sepiaEffect = document.querySelector('.effects__preview--sepia');
-  var marvinEffect = document.querySelector('.effects__preview--marvin');
-  var phobosEffect = document.querySelector('.effects__preview--phobos');
-  var heatEffect = document.querySelector('.effects__preview--heat');
-
-  function onNoneFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    levelPin.style.left = '0%';
-    levelDepth.style.width = '0%';
-  }
-
-  function onChromeFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    uploadPreview.classList.add('effects__preview--chrome');
-    levelPin.style.left = '100%';
-    levelDepth.style.width = '100%';
-  }
-
-  function onSepiaFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    uploadPreview.classList.add('effects__preview--sepia');
-    levelPin.style.left = '100%';
-    levelDepth.style.width = '100%';
-  }
-
-  function onMarvinFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    uploadPreview.classList.add('effects__preview--marvin');
-    levelPin.style.left = '100%';
-    levelDepth.style.width = '100%';
-  }
-
-  function onPhobosFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    uploadPreview.classList.add('effects__preview--phobos');
-    levelPin.style.left = '100%';
-    levelDepth.style.width = '100%';
-  }
-
-  function onHeatFilterClick() {
-    uploadPreview.className = 'img-upload__preview';
-    uploadPreview.classList.add('effects__preview--heat');
-    levelPin.style.left = '100%';
-    levelDepth.style.width = '100%';
-  }
-
-  chromeEffect.addEventListener('click', onChromeFilterClick);
-  sepiaEffect.addEventListener('click', onSepiaFilterClick);
-  marvinEffect.addEventListener('click', onMarvinFilterClick);
-  phobosEffect.addEventListener('click', onPhobosFilterClick);
-  heatEffect.addEventListener('click', onHeatFilterClick);
-  noneEffect.addEventListener('click', onNoneFilterClick);
-
   // Открытие большого изображение по клику на миниатюре
   var miniPhotos = document.querySelectorAll('.picture');
 
@@ -191,8 +116,6 @@
   closeBigPhoto.addEventListener('click', function () {
     bigPicture.classList.add('hidden');
   });
-
-  // Эффекты перетаскивание
 
 
 
