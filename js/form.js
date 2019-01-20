@@ -169,13 +169,13 @@
         for (var i = 0; i < arrHashtags.length; i++) {
             if (arrHashtags[i].length > 20) {
                 hashtags.setCustomValidity("Длинна одного хэш-тега не должна превышать 20 символов");
-                return;
+                break;
             } else if(arrHashtags.length > 5){
                 hashtags.setCustomValidity("Количество хэш-тегов не должно превышать 5");
-                return;
+                break;
             }else if(arrHashtags[i].charAt(0) !== '#'){
                 hashtags.setCustomValidity("Хэш-тег должен начинаться с '#'");
-                return;
+                break;
             } else {
                 hashtags.setCustomValidity('');
             }
