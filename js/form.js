@@ -170,10 +170,10 @@
             if (arrHashtags[i].length > 20) {
                 hashtags.setCustomValidity("Длинна одного хэш-тега не должна превышать 20 символов");
                 break;
-            } else if(arrHashtags.length > 5){
+            } else if (arrHashtags.length > 5) {
                 hashtags.setCustomValidity("Количество хэш-тегов не должно превышать 5");
                 break;
-            }else if(arrHashtags[i].charAt(0) !== '#'){
+            } else if (arrHashtags[i].charAt(0) !== '#') {
                 hashtags.setCustomValidity("Хэш-тег должен начинаться с '#'");
                 break;
             } else {
@@ -181,6 +181,25 @@
             }
         }
         return arrHashtags;
+    });
+
+    // Отправка формы
+
+    var uploadForm = document.querySelector('.img-upload__form');
+
+    uploadForm.addEventListener('submit', function (evt) {
+
+        var data = new FormData(uploadForm);
+
+        evt.preventDefault();
+
+        function onLoad() {
+            document.querySelector('.img-upload__overlay').classList.add('hidden');
+
+        }
+
+        window.backend.save(onLoad, window.errors.rendErrMess, data);
+
     });
 
 })();
