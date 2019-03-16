@@ -11,6 +11,7 @@
 
     function resetFilterValue() {
         uploadPreview.className = 'img-upload__preview';
+        uploadPreview.style.filter = 'none';
         levelPin.style.left = '0%';
         levelDepth.style.width = '0%';
     }
@@ -46,6 +47,7 @@
 
     function onNoneFilterClick() {
         document.querySelector('.effect-level').classList.add('hidden');
+        uploadPreview.style.filter = 'none';
         uploadPreview.className = 'img-upload__preview';
     }
 
@@ -199,6 +201,20 @@
         }
 
         window.backend.save(onLoad, window.errors.rendErrMess, data);
+
+    });
+
+    // Image preview
+
+    var imgUpload = document.querySelector('.img-upload__preview img');
+    var fileUpload = document.querySelector('#upload-file');
+    var reader = new FileReader();
+    fileUpload.addEventListener('change', function () {
+        reader.addEventListener('load', function () {
+            imgUpload.src = reader.result;
+        });
+
+        reader.readAsDataURL(fileUpload.files[0]);
 
     });
 
